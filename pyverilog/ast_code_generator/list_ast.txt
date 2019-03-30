@@ -103,3 +103,5 @@ PragmaEntry
 Disable
 ParallelBlock
 SingleStatement
+WireList
+RegList

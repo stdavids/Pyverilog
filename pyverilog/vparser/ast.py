@@ -840,3 +840,28 @@ class EmbeddedCode(Node):
     def children(self):
         nodelist = []
         return tuple(nodelist)
+
+class WireList(Node):
+    attr_names = ('name_list', 'signed')
+    def __init__(self, name_list, width=None, signed=False, lineno=0):
+        self.lineno = lineno
+        self.name_list = name_list
+        self.width = width
+        self.signed = signed
+    def children(self):
+        nodelist = []
+        if self.width: nodelist.append(self.width)
+        return tuple(nodelist)
+
+class RegList(Node):
+    attr_names = ('name_list', 'signed')
+    def __init__(self, name_list, width=None, signed=False, lineno=0):
+        self.lineno = lineno
+        self.name_list = name_list
+        self.width = width
+        self.signed = signed
+    def children(self):
+        nodelist = []
+        if self.width: nodelist.append(self.width)
+        return tuple(nodelist)
+

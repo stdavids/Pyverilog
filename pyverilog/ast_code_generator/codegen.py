@@ -1022,3 +1022,26 @@ class ASTCodeGenerator(ConvertVisitor):
 
     def visit_EmbeddedCode(self, node):
         return node.code
+
+    def visit_WireList(self, node):
+        filename = getfilename(node)
+        template = self.get_template(filename)
+        template_dict = {
+            'name_str' : ','.join([escape(name) for name in node.name_list]),
+            'width' : '' if node.width is None else self.visit(node.width),
+            'signed' : node.signed,
+            }
+        rslt = template.render(template_dict)
+        return rslt
+
+    def visit_RefList(self, node):
+        filename = getfilename(node)
+        template = self.get_template(filename)
+        template_dict = {
+            'name_str' : ','.join([escape(name) for name in node.name_list]),
+            'width' : '' if node.width is None else self.visit(node.width),
+            'signed' : node.signed,
+            }
+        rslt = template.render(template_dict)
+        return rslt
+
