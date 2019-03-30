@@ -1,1 +1,1 @@
-reg {% if signed %}signed {% endif %}{% if width != '' %}{{ width }} {% endif %}{{ name_str|wordwrap(100) }};
+reg {% if signed %}signed {% endif %}{% if width != '' %}{{ width }} {% endif %}{{ name_str }};

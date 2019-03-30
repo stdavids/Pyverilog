@@ -1026,19 +1026,29 @@ class ASTCodeGenerator(ConvertVisitor):
     def visit_WireList(self, node):
         filename = getfilename(node)
         template = self.get_template(filename)
+        name_str = ','.join([escape(name) for name in node.name_list])
+        for i in range(int(len(name_str)/80)):
+          start_index = (i+1)*80 + i
+          comma_index = name_str.rfind(',',0,start_index)
+          name_str = name_str[:comma_index+1] + '\n' + name_str[comma_index+1:]
         template_dict = {
-            'name_str' : ','.join([escape(name) for name in node.name_list]),
+            'name_str' : name_str,
             'width' : '' if node.width is None else self.visit(node.width),
             'signed' : node.signed,
             }
         rslt = template.render(template_dict)
         return rslt
 
-    def visit_RefList(self, node):
+    def visit_RegList(self, node):
         filename = getfilename(node)
         template = self.get_template(filename)
+        name_str = ','.join([escape(name) for name in node.name_list])
+        for i in range(int(len(name_str)/80)):
+          start_index = (i+1)*80 + i
+          comma_index = name_str.rfind(',',0,start_index)
+          name_str = name_str[:comma_index+1] + '\n' + name_str[comma_index+1:]
         template_dict = {
-            'name_str' : ','.join([escape(name) for name in node.name_list]),
+            'name_str' : name_str,
             'width' : '' if node.width is None else self.visit(node.width),
             'signed' : node.signed,
             }
